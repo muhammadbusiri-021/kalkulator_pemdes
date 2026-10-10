@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>241</width>
+    <height>320</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QGridLayout" name="gridLayout_2">
+    <item row="0" column="0">
+     <widget class="QTabWidget" name="kalkulator">
+      <property name="currentIndex">
+       <number>1</number>
+      </property>
+      <widget class="QWidget" name="tab_3">
+       <attribute name="title">
+        <string>Tab 1</string>
+       </attribute>
+       <widget class="QWidget" name="">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>60</y>
+          <width>201</width>
+          <height>141</height>
+         </rect>
+        </property>
+        <layout class="QGridLayout" name="gridLayout">
+         <property name="topMargin">
+          <number>9</number>
+         </property>
+         <property name="spacing">
+          <number>0</number>
+         </property>
+         <item row="1" column="2">
+          <widget class="QPushButton" name="btn_6">
+           <property name="text">
+            <string>6</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1">
+          <widget class="QPushButton" name="btn_5">
+           <property name="text">
+            <string>5</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="3">
+          <widget class="QPushButton" name="btn_hasil">
+           <property name="text">
+            <string>=</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="2">
+          <widget class="QPushButton" name="btn_3">
+           <property name="text">
+            <string>3</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QPushButton" name="btn_2">
+           <property name="text">
+            <string>2</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="0">
+          <widget class="QPushButton" name="btn_1">
+           <property name="text">
+            <string>1</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="1">
+          <widget class="QPushButton" name="btn_0">
+           <property name="text">
+            <string>0</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="3">
+          <widget class="QPushButton" name="btn_c">
+           <property name="text">
+            <string>C</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="QPushButton" name="btn_4">
+           <property name="text">
+            <string>4</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+       <widget class="QLineEdit" name="display">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>10</y>
+          <width>201</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="tab_4">
+       <attribute name="title">
+        <string>Tab 2</string>
+       </attribute>
+       <widget class="QLabel" name="label">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>10</y>
+          <width>141</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Zahratul jannah (25-101)</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_2">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>40</y>
+          <width>171</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Moh.Busiri (25-064)</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_3">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>70</y>
+          <width>211</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Ach.Qusyairi Zainul Mahbubi (25-065)</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_4">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>100</y>
+          <width>211</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>muhammad fatih magfir (25-114)</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_5">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>130</y>
+          <width>211</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Moh. Amirul Hasan (25-132)</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_6">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>170</y>
+          <width>211</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>angka akhir 0, 1, 2, 3, 4, 5, 6</string>
+        </property>
+       </widget>
+      </widget>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>241</width>
+     <height>33</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menu_operation">
+    <property name="title">
+     <string>&amp;operation</string>
+    </property>
+    <addaction name="action_tambah"/>
+    <addaction name="action_kurang"/>
+    <addaction name="action_kali"/>
+    <addaction name="action_bagi"/>
+    <addaction name="action_kuadrat"/>
+    <addaction name="action_invers"/>
+    <addaction name="action_clear"/>
+   </widget>
+   <addaction name="menu_operation"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="action_tambah">
+   <property name="text">
+    <string>&amp;tambah</string>
+   </property>
+  </action>
+  <action name="action_kurang">
+   <property name="text">
+    <string>&amp;kurang</string>
+   </property>
+  </action>
+  <action name="action_kali">
+   <property name="text">
+    <string>&amp;kali</string>
+   </property>
+  </action>
+  <action name="action_bagi">
+   <property name="text">
+    <string>&amp;bagi</string>
+   </property>
+  </action>
+  <action name="action_kuadrat">
+   <property name="text">
+    <string>&amp;kuadrat</string>
+   </property>
+  </action>
+  <action name="action_invers">
+   <property name="text">
+    <string>&amp;invers</string>
+   </property>
+  </action>
+  <action name="action_clear">
+   <property name="text">
+    <string>&amp;clear</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
