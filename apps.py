@@ -1,7 +1,7 @@
+
 import sys
 import math
 
-from PyQt6.QtGui import QAction
 from PyQt6.QtWidgets import (
     QApplication,
     QMainWindow,
@@ -10,80 +10,82 @@ from PyQt6.QtWidgets import (
     QSizePolicy,
 )
 
-from test1 import Ui_MainWindow
+from kalulator import Ui_MainWindow
 
 
 class MainWindow(QMainWindow, Ui_MainWindow):
     def __init__(self):
         super().__init__()
 
-        # Memanggil tampilan dari Qt Designer
         self.setupUi(self)
-
         self.setWindowTitle("Kalkulator")
         self.kalkulator.setCurrentIndex(0)
 
         # Variabel perhitungan
-        self.angka1 = 0
+        self.angka1 = 0.0
         self.operator = ""
         self.input_baru = True
 
-        # Layout vertikal untuk display dan tombol
+        # Mengatur layout tab kalkulator
         layout_utama = QVBoxLayout(self.tab_3)
         layout_utama.setContentsMargins(6, 6, 6, 6)
         layout_utama.setSpacing(4)
 
-        # Layout horizontal untuk display
         layout_display = QHBoxLayout()
-        layout_display.setContentsMargins(0, 0, 0, 0)
         layout_display.addWidget(self.display)
 
-        # Layout horizontal untuk area tombol
         layout_tombol = QHBoxLayout()
-        layout_tombol.setContentsMargins(0, 0, 0, 0)
-        layout_tombol.addWidget(self.widget)
+        layout_tombol.addWidget(self.layoutWidget)
 
-        # Menggabungkan layout
         layout_utama.addLayout(layout_display)
         layout_utama.addLayout(layout_tombol, 1)
 
-        # Agar ukuran mengikuti jendela
         self.display.setMinimumHeight(35)
         self.display.setReadOnly(True)
 
-        self.widget.setSizePolicy(
+        self.layoutWidget.setSizePolicy(
             QSizePolicy.Policy.Expanding,
             QSizePolicy.Policy.Expanding
         )
 
         # Menghubungkan tombol angka
-        self.btn_0.clicked.connect(
-            lambda: self.input_angka("0")
+        tombol_angka = {
+            self.btn_0: "0",
+            self.btn_1: "1",
+            self.btn_2: "2",
+            self.btn_3: "3",
+            self.btn_4: "4",
+            self.btn_5: "5",
+            self.btn_6: "6",
+        }
+
+        for tombol, angka in tombol_angka.items():
+            tombol.clicked.connect(
+                lambda checked=False, a=angka: self.input_angka(a)
+            )
+
+        # Menghubungkan tombol operasi pada tampilan
+        self.pushButton.clicked.connect(
+            lambda: self.pilih_operator("+")
         )
-        self.btn_1.clicked.connect(
-            lambda: self.input_angka("1")
+        self.pushButton_3.clicked.connect(
+            lambda: self.pilih_operator("-")
         )
-        self.btn_2.clicked.connect(
-            lambda: self.input_angka("2")
+        self.pushButton_5.clicked.connect(
+            lambda: self.pilih_operator("*")
         )
-        self.btn_3.clicked.connect(
-            lambda: self.input_angka("3")
-        )
-        self.btn_4.clicked.connect(
-            lambda: self.input_angka("4")
-        )
-        self.btn_5.clicked.connect(
-            lambda: self.input_angka("5")
-        )
-        self.btn_6.clicked.connect(
-            lambda: self.input_angka("6")
+        self.pushButton_4.clicked.connect(
+            lambda: self.pilih_operator("/")
         )
 
-        # Tombol hasil dan Clear All
+        self.pushButton_6.clicked.connect(self.kuadrat)
+        self.pushButton_7.clicked.connect(self.invers)
+        self.pushButton_8.clicked.connect(self.akar)
+
         self.btn_hasil.clicked.connect(self.hitung)
         self.btn_c.clicked.connect(self.clear)
 
-        # Membuat menu menggunakan tanda &
+        # Mengatur menu operasi
         self.menu_operation.setTitle("&Operation")
 
         self.action_tambah.setText("&Tambah")
@@ -93,12 +95,38 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.action_kuadrat.setText("K&uadrat")
         self.action_invers.setText("I&nvers")
         self.action_clear.setText("&Clear")
+        self.actionakar.setText("&Akar")
 
-        # Menambahkan aksi akar kuadrat
-        self.action_akar = QAction("A&kar", self)
-        self.menu_operation.addAction(self.action_akar)
+        
+        # Mengatur shortcut Alt pada menu operasi
+        self.action_tambah.setText("&Tambah")
+        self.action_tambah.setShortcut("Alt+T")
 
-        # Menghubungkan menu dengan operasi
+        self.action_kurang.setText("&Kurang")
+        self.action_kurang.setShortcut("Alt+K")
+
+        self.action_kali.setText("K&ali")
+        self.action_kali.setShortcut("Alt+A")
+
+        self.action_bagi.setText("&Bagi")
+        self.action_bagi.setShortcut("Alt+B")
+
+        self.action_kuadrat.setText("K&uadrat")
+        self.action_kuadrat.setShortcut("Alt+U")
+
+        self.action_invers.setText("&Invers")
+        self.action_invers.setShortcut("Alt+I")
+
+        self.actionakar.setText("&Akar")
+        self.actionakar.setShortcut("Alt+R")
+
+        self.action_clear.setText("&Clear")
+        self.action_clear.setShortcut("Alt+C")
+
+
+        
+
+        # Menghubungkan menu operasi
         self.action_tambah.triggered.connect(
             lambda: self.pilih_operator("+")
         )
@@ -114,10 +142,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         self.action_kuadrat.triggered.connect(self.kuadrat)
         self.action_invers.triggered.connect(self.invers)
-        self.action_akar.triggered.connect(self.akar)
+        self.actionakar.triggered.connect(self.akar)
         self.action_clear.triggered.connect(self.clear)
 
-    # Memasukkan angka melalui tombol mouse
+    # Memasukkan angka
     def input_angka(self, angka):
         if self.input_baru:
             self.display.setText(angka)
@@ -125,16 +153,16 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         else:
             teks = self.display.text()
 
-            if teks == "0" or teks == "Error":
+            if teks in ("0", "Error"):
                 self.display.setText(angka)
             else:
                 self.display.setText(teks + angka)
 
-    # Memilih operasi matematika
+    # Memilih operator
     def pilih_operator(self, op):
         teks = self.display.text()
 
-        if teks == "" or teks == "Error":
+        if not teks or teks == "Error":
             return
 
         try:
@@ -142,7 +170,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         except ValueError:
             return
 
-        if self.operator != "" and not self.input_baru:
+        # Menghitung operasi sebelumnya jika ada
+        if self.operator and not self.input_baru:
             if not self.hitung():
                 return
 
@@ -152,32 +181,29 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.operator = op
         self.input_baru = True
 
-    # Menghitung tambah, kurang, kali, dan bagi
+    # Menghitung operasi dasar
     def hitung(self):
-        if self.operator == "":
+        if not self.operator:
             return True
 
+        teks = self.display.text()
+
+        if not teks or teks == "Error":
+            return False
+
         try:
-            angka2 = float(self.display.text())
+            angka2 = float(teks)
 
             if self.operator == "+":
                 hasil = self.angka1 + angka2
-
             elif self.operator == "-":
                 hasil = self.angka1 - angka2
-
             elif self.operator == "*":
                 hasil = self.angka1 * angka2
-
             elif self.operator == "/":
                 if angka2 == 0:
-                    self.display.setText("Error")
-                    self.reset()
-                    self.input_baru = True
-                    return False
-
+                    raise ZeroDivisionError
                 hasil = self.angka1 / angka2
-
             else:
                 return False
 
@@ -186,26 +212,23 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.input_baru = True
             return True
 
-        except (ValueError, OverflowError):
+        except (ValueError, OverflowError, ZeroDivisionError):
             self.display.setText("Error")
             self.reset()
             self.input_baru = True
             return False
 
-    # Menghitung kuadrat: x * x
+    # Menghitung kuadrat
     def kuadrat(self):
         try:
             angka = float(self.display.text())
-            hasil = angka * angka
-
-            self.tampil_hasil(hasil)
-            self.reset()
-            self.input_baru = True
+            self.tampil_hasil(angka ** 2)
 
         except (ValueError, OverflowError):
             self.display.setText("Error")
-            self.reset()
-            self.input_baru = True
+
+        self.reset()
+        self.input_baru = True
 
     # Menghitung invers: 1 / x
     def invers(self):
@@ -213,18 +236,15 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             angka = float(self.display.text())
 
             if angka == 0:
-                self.display.setText("Error")
-            else:
-                hasil = 1 / angka
-                self.tampil_hasil(hasil)
+                raise ZeroDivisionError
 
-            self.reset()
-            self.input_baru = True
+            self.tampil_hasil(1 / angka)
 
-        except (ValueError, OverflowError):
+        except (ValueError, OverflowError, ZeroDivisionError):
             self.display.setText("Error")
-            self.reset()
-            self.input_baru = True
+
+        self.reset()
+        self.input_baru = True
 
     # Menghitung akar kuadrat
     def akar(self):
@@ -232,33 +252,34 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             angka = float(self.display.text())
 
             if angka < 0:
-                self.display.setText("Error")
-            else:
-                hasil = math.sqrt(angka)
-                self.tampil_hasil(hasil)
+                raise ValueError
 
-            self.reset()
-            self.input_baru = True
+            self.tampil_hasil(math.sqrt(angka))
 
         except (ValueError, OverflowError):
             self.display.setText("Error")
-            self.reset()
-            self.input_baru = True
 
-    # Menghapus semua input
+        self.reset()
+        self.input_baru = True
+
+    # Membersihkan layar
     def clear(self):
         self.display.clear()
         self.reset()
         self.input_baru = True
 
-    # Mengatur ulang variabel operasi
+    # Mereset variabel operasi
     def reset(self):
-        self.angka1 = 0
+        self.angka1 = 0.0
         self.operator = ""
 
     # Menampilkan hasil
     def tampil_hasil(self, hasil):
-        if hasil == 0:
+        hasil = float(hasil)
+
+        if not math.isfinite(hasil):
+            self.display.setText("Error")
+        elif hasil == 0:
             self.display.setText("0")
         elif hasil.is_integer():
             self.display.setText(str(int(hasil)))
