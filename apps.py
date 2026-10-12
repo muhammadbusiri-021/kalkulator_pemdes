@@ -21,12 +21,12 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.setWindowTitle("Kalkulator")
         self.kalkulator.setCurrentIndex(0)
 
-        # Variabel perhitungan
+        # variabel perhitungan digunakan untuk menyimpan
         self.angka1 = 0.0
         self.operator = ""
         self.input_baru = True
 
-        # Mengatur layout tab kalkulator
+        # Mengatur layout tab kalkulator 
         layout_utama = QVBoxLayout(self.tab_3)
         layout_utama.setContentsMargins(6, 6, 6, 6)
         layout_utama.setSpacing(4)
@@ -48,7 +48,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             QSizePolicy.Policy.Expanding
         )
 
-        # Menghubungkan tombol angka
+        # Menghubungkan tombol angka 
         tombol_angka = {
             self.btn_0: "0",
             self.btn_1: "1",
@@ -85,18 +85,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.btn_hasil.clicked.connect(self.hitung)
         self.btn_c.clicked.connect(self.clear)
 
-        # Mengatur menu operasi
+        # Mengatur menu operasi dengan shorcutnya
         self.menu_operation.setTitle("&Operation")
-
-        self.action_tambah.setText("&Tambah")
-        self.action_kurang.setText("Ku&rang")
-        self.action_kali.setText("Ka&li")
-        self.action_bagi.setText("&Bagi")
-        self.action_kuadrat.setText("K&uadrat")
-        self.action_invers.setText("I&nvers")
-        self.action_clear.setText("&Clear")
-        self.actionakar.setText("&Akar")
-
         
         # Mengatur shortcut Alt pada menu operasi
         self.action_tambah.setText("&Tambah")
@@ -123,8 +113,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.action_clear.setText("&Clear")
         self.action_clear.setShortcut("Alt+C")
 
-
-        
 
         # Menghubungkan menu operasi
         self.action_tambah.triggered.connect(
