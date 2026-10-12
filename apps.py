@@ -145,6 +145,26 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.actionakar.triggered.connect(self.akar)
         self.action_clear.triggered.connect(self.clear)
 
+        
+        # Mengatur ukuran tombol kalkulator
+        daftar_tombol = [
+            self.btn_0, self.btn_1, self.btn_2,
+            self.btn_3, self.btn_4, self.btn_5,
+            self.btn_6, self.btn_c, self.btn_hasil,
+            self.pushButton, self.pushButton_3,
+            self.pushButton_4, self.pushButton_5,
+            self.pushButton_6, self.pushButton_7,
+            self.pushButton_8,
+        ]
+
+        for tombol in daftar_tombol:
+            tombol.setMinimumSize(45, 40)
+            tombol.setSizePolicy(
+                QSizePolicy.Policy.Expanding,
+                QSizePolicy.Policy.Expanding
+            )
+
+
     # Memasukkan angka
     def input_angka(self, angka):
         if self.input_baru:
